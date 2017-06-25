@@ -67,7 +67,7 @@ class Login extends Controller
         $curl=curl_init(); 
         curl_setopt($curl,CURLOPT_RETURNTRANSFER,1); 
         curl_setopt($curl,CURLOPT_HEADER,0 ) ;
-        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wxf6fd3b6635f226b5&secret=306b48f56e6dd01131f2dc5a4d048a27&js_code=' . $post['code'] . '&grant_type=authorization_code'; 
+        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx16ed6d71ca66500d&secret=e2e57713307a0001e142a197902e376d&js_code=' . $post['code'] . '&grant_type=authorization_code'; 
         curl_setopt($curl,CURLOPT_URL,$url);
         $result=curl_exec($curl); 
         curl_close($curl);
