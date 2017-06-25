@@ -96,7 +96,7 @@ class GetData extends Controller
     		
     		default:
     			$error['code'] = 3;
-    			$error['reason'] = "The classify cannt use for search";
+    			$error['reason'] = "The classify cann‘t use for search";
     			return $error;
     			break;
     	}

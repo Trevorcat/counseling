@@ -31,6 +31,15 @@ Route::group(['middleware' => ['web']], function () {
 	});
 	Route::post('/login/','Login@Login');
 
+	/**
+	 * @param code 请求微信服务器返回的code
+	 *
+	 * @return openid等参数
+	 */
+	Route::get('/getopenid/',function(){
+		return 'The API can not be used by the GET method';
+	});
+	Route::post('/getopenid/','Login@getOpenId');
 
 	/**
 	 * @param string open_id 用户openId
@@ -85,4 +94,6 @@ Route::group(['middleware' => ['web']], function () {
 		return 'The API can not be used by the GET method';
 	});
 	Route::post('/getdata/','GetData@getData');
+
+
 });
