@@ -19,15 +19,18 @@ class Register extends Controller
     	$registerParameter = array('open_id', 'wechat_id', 'tel', 'name', 'nick_name');
 
     	foreach ($registerParameter as $key => $value) {
+            if ($value == 'tel' || $value == 'name') {
+                continue;
+            }
     		if (!isset($post[$value])) {
-    			$error['code'] = 1;
+    			$error['code'] = '021';
     			$error['reason'] = 'Need more key : ' . $value;
     			return $error;
     		}
     	}
     	foreach ($post as $key => $value) {
     		if (!in_array($key, $registerParameter)) {
-    			$error['code'] = 2;
+    			$error['code'] = '022';
     			$error['reason'] = 'There\'s a illegal parameter : '.$key;
     			return $error;
     		}
@@ -45,14 +48,14 @@ class Register extends Controller
 
     	foreach ($changeParameter as $key => $value) {
     		if (!isset($post[$value])) {
-    			$error['code'] = 1;
+    			$error['code'] = '023';
     			$error['reason'] = 'Need more key : ' . $value;
     			return $error;
     		}
     	}
     	foreach ($post as $key => $value) {
     		if (!in_array($key, $changeParameter)) {
-    			$error['code'] = 2;
+    			$error['code'] = '024';
     			$error['reason'] = 'There\'s a illegal parameter : '.$key;
     			return $error;
     		}

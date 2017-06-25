@@ -15,18 +15,19 @@ class Login extends Controller
 
     public function Login(Request $request){
     	$post = $request->json()->all();
+
     	$loginParameter = array('openId');
 
     	foreach ($loginParameter as $key => $value) {
     		if (!isset($post[$value])) {
-    			$error['code'] = 1;
+    			$error['code'] = '011';
     			$error['reason'] = 'Need more key : ' . $value;
     			return $error;
     		}
     	}
     	foreach ($post as $key => $value) {
     		if (!in_array($key, $loginParameter)) {
-    			$error['code'] = 2;
+    			$error['code'] = '012';
     			$error['reason'] = 'There\'s a illegal parameter : '.$key;
     			return $error;
     		}
@@ -42,4 +43,36 @@ class Login extends Controller
     	$sucess['code'] = 0;
     	return $sucess;
     }
+
+    public function getOpenId(Request $request){
+        $post = $request->json()->all();
+
+        $inputParameter = array('code');
+
+        foreach ($loginParameter as $key => $value) {
+            if (!isset($post[$value])) {
+                $error['code'] = '013';
+                $error['reason'] = 'Need more key : ' . $value;
+                return $error;
+            }
+        }
+        foreach ($post as $key => $value) {
+            if (!in_array($key, $loginParameter)) {
+                $error['code'] = '014';
+                $error['reason'] = 'There\'s a illegal parameter : '.$key;
+                return $error;
+            }
+        }
+
+        $curl=curl_init(); 
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1); 
+        curl_setopt($curl,CURLOPT_HEADER,0 ) ;
+        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wxf6fd3b6635f226b5&secret=306b48f56e6dd01131f2dc5a4d048a27&js_code=' . $post['code'] . '&grant_type=authorization_code'; 
+        curl_setopt($curl,CURLOPT_URL,$url);
+        $result=curl_exec($curl); 
+        curl_close($curl);
+
+        return $result;
+    }
+
 }

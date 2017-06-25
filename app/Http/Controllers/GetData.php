@@ -19,14 +19,14 @@ class GetData extends Controller
 
     	foreach ($getDataParameter as $key => $value) {
     		if (!isset($post[$value])) {
-    			$error['code'] = 1;
+    			$error['code'] = '031';
     			$error['reason'] = 'Need more key : ' . $value;
     			return $error;
     		}
     	}
     	foreach ($post as $key => $value) {
     		if (!in_array($key, $getDataParameter)) {
-    			$error['code'] = 2;
+    			$error['code'] = '032';
     			$error['reason'] = 'There\'s a illegal parameter : '.$key;
     			return $error;
     		}
